@@ -1,113 +1,59 @@
-# Node Express Starter
+# Node Express CRUD - Starter CRUD from Brian Jenney JS Code 
 
----
+This starter CRUD is just a jumping off point for understanding all the moving parts of a Node Express CRUD. There is not solution or tutorial for this project. This is a functional CRUD that can be incoroprated into other projects. For support and to work thru questions there is a private Slack community,  called JS CodeCoach, comprised of other bootcamp graduates and junior JavaScript/React developers whom are all working on strengthing their developer skills. This community is facilitated by [Brian Jenney](https://www.yourcodecoach.com/blog).
 
-Video Walkthrough => https://www.loom.com/share/b1a7cbc0f57444a281047eba2c42fe1c
+## Table of contents
 
-A barebones node express app with some basic CRUD operations using an object in place of a database. Includes unit tests using `supertest` https://www.npmjs.com/package/supertest
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Resources](#resouces)
+- [My process](#my-process)
+  - [What I learned](#what-i-learned)
+- [Author](#author)
 
----
 
-## Architecture
+## Overview
 
----
+### The challenge
+The challenge is to learn as much as I can about how this CRUD works. This means breaking things and then fixing them. It means learning as much about each part of the code and finding good resources that I can use in the future. Its all about learning on my own, at my pace, and without a tutorial. This CRUD can also be used in future projects!🚀
 
-This app uses a common pattern of having `controllers` and `routes` in separate folders.
 
-Controllers are used to manipulate and query data.
+### Resouces
+- [Nodemon](https://www.digitalocean.com/community/tutorials/workflow-nodemon) - enables hot reloading
+- Postman [Community Forum](https://community.postman.com/)
 
-Routes simply listen for requests on certain paths and provide methods which are called on those routes.
+## My process
+- Cloned and made git repo for this CRUD. Initially I had forked and cloned Brian's repo but I want this to be my own repo and claim those contribution boxes on Github ✅✅✅
+- Using node.js version 18.16.0 and npm 9.5.1. I had installed nvm as a Node version manager a couple of days before and used ```nvm install --lts``` to get the latest long term support version of Node.js. 
+- Changed the local port from 5000 to 3000. My Mac uses port 5000 for Airplay whatever that is??? I could only find one place to change this in the server.js file.
+- This CRUD includes Nodemon script which allows for "hot reloading". Use ```npm run dev``` instead of ```npm start```. This is similar to what I have in my Catch of the Day project and in all my 11ty projects.
+- The server.js file is listed in the package.json as the ``` "main": "server.js" ```. This means that this is the file excuted when you run npm start. This could easily be index.js or app.js. Similar to how in codesandbox.io when you hover over files you can find the entry file.
+- Decided to use Postman API platform with this project. That took a little bit of doing to figure out. I even made a little [loom video](https://www.loom.com/share/8a0b04475bcc4fd8b05b89f0e597c427) about some of my confusion 😀
 
-Middlewares are methods that are called before the request goes to a controller. In this app, we have a `validateUserBody` middleware which ensures all incoming requests have an `id` property - if they DO NOT, we simply reject the request - if they DO, we continue the request using `next`
 
----
+### server.js 
+This file is executed when launch the CRUD. Notable bits in this file.
+- Everything imported/define at the top is a node_module except for allRoutes. This points to the routes/index.js file.
+- The server is where I changed the port from 5000 to 3000 for the local host listening
+- I can't find an .env file???
+- 
 
-## Getting Started
-
----
-
-`npm install`
-
-`npm start`
-
-`npm run dev` to start with hot reloading
-
-`npm test`
-
----
-
-## How To Use
-
----
-
-You'll see many comments throughout the codebase which highlight common patterns and libraries.
-
-There are 5 routes you can reach from your localhost like so:
-
-[GET] `http://localhost:5000/user`
-
-[POST] `http://localhost:5000/user`
-
-[PUT] `http://localhost:5000/user`
-
-[DELETE] `http://localhost:5000/user`
-
----
-
-### For uploading files
-
----
-
-[POST] `http://localhost:5000/files/upload`
-
----
-
-### Examples:
-
----
-
-**To create a new user**
-
-[POST] http://localhost:5000/user
-
-Payload:
-
-```js
-{
-    "id": "123",
-    "email": "brianjenney83@gmail.com",
-    "name": "brian"
-}
+### userRoutes.js
+This file defines what the CRUD is listening for. For example if you want to add a user then you would type ``` http://localhost:3000/user/``` and then use [post]. This is defined in the first line in the code below.
+``` 
+router.route('/').post(validateUserBody, createUser);
+router.route('/:id').get(validateUserBody, getUser);
+router.route('/').put(validateUserBody, updateUser);
+router.route('/:id').delete(validateUserBody, removeUser);
 ```
 
-**To get a user with an id of 123:**
 
-http://localhost:5000/user/123
 
-**To upload a file using a tool like postman:**
+### What I learned
 
-Video Walkthrough: https://www.loom.com/share/0b3645c2c5b94311961d606f9ae22bd3
 
-You can use an example csv file at `mockData/uber_jan_feb.csv`
+## Author
 
-<img src="mockData/postman_example.png">
-
----
-
-### Further Reading
-
----
-
-CORS: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
-
-REST Architecture: https://restfulapi.net/
-
----
-
-## Next Steps
-
----
-
-You can create a true database connection to persist your data and add new routes, controllers and middlewares.
-
-Add validation middleware for the files controller. It should check that only `.csv` files are accepted.
+- Website - [Amy Spencer](https://spencerproject.com/)
+- Frontend Mentor - [@amyspencerproject](https://www.frontendmentor.io/profile/amyspencerproject)
+- Linkedin - [amyspencercodes](https://www.linkedin.com/in/amyspencercodes/)

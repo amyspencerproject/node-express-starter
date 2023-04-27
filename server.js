@@ -9,7 +9,8 @@ config();
 
 // start the app and listen for requests on a port
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
+//changed from 5000 to 3000 bc Mac runs Airplay on port 5000
 
 if (process.env.NODE_ENV !== "test") {
   app.listen(port, () => console.log(`Running on port ${port}`));
